@@ -8,7 +8,7 @@ npm install next-json-view
 
 ## Usage
 ```javascript
-import { JSONCanvasVisualizer } from 'json-canvas-visualizer';
+import { JSONCanvasVisualizer } from 'next-json-view';
 
 const MyComponent = () => {
   const data = {
