@@ -1,0 +1,53 @@
+{
+  "name": "next-json-view",
+  "version": "1.0.0",
+  "description": "A canvas-based JSON visualizer for Next.js and React",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "json",
+    "visualizer",
+    "canvas"
+  ],
+  "author": "Hacı Mert Gökhan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hacimertgokhan/next-json-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hacimertgokhan/next-json-view/issues"
+  },
+  "homepage": "https://github.com/hacimertgokhan/next-json-view#readme",
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rollup": "^4.29.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
+}
