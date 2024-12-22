@@ -1,6 +1,6 @@
 'use strict';
 
-var tslib_es6 = require('../../node_modules/tslib/tslib.es6.js');
+var tslib_es6 = require('../../node_modules/.pnpm/@rollup_plugin-typescript@12.1.2_rollup@4.29.1_tslib@2.8.1_typescript@5.7.2/node_modules/tslib/tslib.es6.js');
 var React = require('react');
 
 // @ts-ignore

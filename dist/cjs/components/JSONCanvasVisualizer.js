@@ -1,11 +1,11 @@
-import { __assign } from '../../node_modules/.pnpm/@rollup_plugin-typescript@12.1.2_rollup@4.29.1_tslib@2.8.1_typescript@5.7.2/node_modules/tslib/tslib.es6.js';
-import React, { useRef, useEffect } from 'react';
+'use strict';
+
+var React = require('react');
 
 // @ts-ignore
-var JSONCanvasVisualizer = function (_a) {
-    var data = _a.data, _b = _a.width, width = _b === void 0 ? 800 : _b, _c = _a.height, height = _c === void 0 ? 600 : _c, _d = _a.options, options = _d === void 0 ? {} : _d;
-    var canvasRef = useRef(null);
-    var defaultOptions = {
+const JSONCanvasVisualizer = ({ data, width = 800, height = 600, options = {} }) => {
+    const canvasRef = React.useRef(null);
+    const defaultOptions = {
         padding: 20,
         fontSize: 14,
         fontFamily: 'Monaco, monospace',
@@ -20,49 +20,47 @@ var JSONCanvasVisualizer = function (_a) {
         booleanColor: '#0550ae',
         indentSize: 20,
     };
-    var mergedOptions = __assign(__assign({}, defaultOptions), options);
-    var drawJSON = function (ctx, obj, x, y, level) {
-        if (level === void 0) { level = 0; }
-        var indent = level * mergedOptions.indentSize;
-        ctx.font = "".concat(mergedOptions.fontSize, "px ").concat(mergedOptions.fontFamily);
+    const mergedOptions = Object.assign(Object.assign({}, defaultOptions), options);
+    const drawJSON = (ctx, obj, x, y, level = 0) => {
+        const indent = level * mergedOptions.indentSize;
+        ctx.font = `${mergedOptions.fontSize}px ${mergedOptions.fontFamily}`;
         if (Array.isArray(obj)) {
             ctx.fillStyle = mergedOptions.bracketColor;
             ctx.fillText('[', x + indent, y);
-            var currentY_1 = y + mergedOptions.fontSize + 5;
-            obj.forEach(function (item, index) {
-                currentY_1 = drawJSON(ctx, item, x, currentY_1, level + 1);
+            let currentY = y + mergedOptions.fontSize + 5;
+            obj.forEach((item, index) => {
+                currentY = drawJSON(ctx, item, x, currentY, level + 1);
                 if (index < obj.length - 1) {
                     ctx.fillStyle = mergedOptions.textColor;
-                    ctx.fillText(',', x + indent + ctx.measureText(']').width, currentY_1 - mergedOptions.fontSize - 5);
+                    ctx.fillText(',', x + indent + ctx.measureText(']').width, currentY - mergedOptions.fontSize - 5);
                 }
             });
             ctx.fillStyle = mergedOptions.bracketColor;
-            ctx.fillText(']', x + indent, currentY_1);
-            return currentY_1 + mergedOptions.fontSize + 5;
+            ctx.fillText(']', x + indent, currentY);
+            return currentY + mergedOptions.fontSize + 5;
         }
         if (typeof obj === 'object' && obj !== null) {
             ctx.fillStyle = mergedOptions.bracketColor;
             ctx.fillText('{', x + indent, y);
-            var currentY_2 = y + mergedOptions.fontSize + 5;
-            Object.entries(obj).forEach(function (_a, index) {
-                var key = _a[0], value = _a[1];
+            let currentY = y + mergedOptions.fontSize + 5;
+            Object.entries(obj).forEach(([key, value], index) => {
                 ctx.fillStyle = mergedOptions.keyColor;
-                ctx.fillText("\"".concat(key, "\": "), x + indent + mergedOptions.indentSize, currentY_2);
-                var keyWidth = ctx.measureText("\"".concat(key, "\": ")).width;
-                currentY_2 = drawJSON(ctx, value, x + keyWidth, currentY_2, level + 1);
+                ctx.fillText(`"${key}": `, x + indent + mergedOptions.indentSize, currentY);
+                const keyWidth = ctx.measureText(`"${key}": `).width;
+                currentY = drawJSON(ctx, value, x + keyWidth, currentY, level + 1);
                 if (index < Object.entries(obj).length - 1) {
                     ctx.fillStyle = mergedOptions.textColor;
-                    ctx.fillText(',', x + indent + mergedOptions.indentSize, currentY_2 - mergedOptions.fontSize - 5);
+                    ctx.fillText(',', x + indent + mergedOptions.indentSize, currentY - mergedOptions.fontSize - 5);
                 }
             });
             ctx.fillStyle = mergedOptions.bracketColor;
-            ctx.fillText('}', x + indent, currentY_2);
-            return currentY_2 + mergedOptions.fontSize + 5;
+            ctx.fillText('}', x + indent, currentY);
+            return currentY + mergedOptions.fontSize + 5;
         }
-        // Primitive değerler için
+        // Primitive values
         if (typeof obj === 'string') {
             ctx.fillStyle = mergedOptions.stringColor;
-            ctx.fillText("\"".concat(obj, "\""), x + indent, y);
+            ctx.fillText(`"${obj}"`, x + indent, y);
         }
         else if (typeof obj === 'number') {
             ctx.fillStyle = mergedOptions.numberColor;
@@ -78,10 +76,10 @@ var JSONCanvasVisualizer = function (_a) {
         }
         return y + mergedOptions.fontSize + 5;
     };
-    useEffect(function () {
-        var canvas = canvasRef.current;
+    React.useEffect(() => {
+        const canvas = canvasRef.current;
         // @ts-ignore
-        var ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
         // Canvas temizleme
         ctx.fillStyle = mergedOptions.backgroundColor;
         ctx.fillRect(0, 0, width, height);
@@ -91,5 +89,5 @@ var JSONCanvasVisualizer = function (_a) {
     return (React.createElement("canvas", { ref: canvasRef, width: width, height: height, style: { border: '1px solid #ddd' } }));
 };
 
-export { JSONCanvasVisualizer as default };
+module.exports = JSONCanvasVisualizer;
 //# sourceMappingURL=JSONCanvasVisualizer.js.map
