@@ -25,3 +25,7 @@ const MyComponent = () => {
   );
 };
 ```
+
+## Showcase
+
+![img.png](img.png)
